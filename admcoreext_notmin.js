@@ -54,26 +54,39 @@ var playerTvc, playerIframe, isAudienceCreated = !1;
 window.addEventListener ? window.addEventListener("message", function(a) {
     "addParam" == a.data && a.source.postMessage('addParamTVC("' + admParamTvc() + '")', a.origin);
     "admGetIP" == a.data && a.source.postMessage('admSetIP("' + _AdmGetIP("__IP") + '")', a.origin);
-    if(a.origin.indexOf("vcmedia.vn")!= -1 && a.data.toSring().indexOf("_admTargetTvcPreroll")!= -1)
-    {
-      eval(e.data);
+    try{
+      if(a.origin.indexOf("vcmedia.vn")!= -1 && a.data("_admTargetTvcPreroll")!= -1)
+      {
+        eval(e.data);
+      }
+    }catch(e){
+      console.log(e);
     }
     "chkPrLink" == a.data && "undefined" != typeof _chkPrLink && a.source.postMessage('addChkPrLink("' + _chkPrLink + '")', a.origin); - 1 !== a.origin.indexOf("vcmedia.vn") && -1 !== a.data.toString().indexOf(".html") ? (playerIframe = a.origin, playerTvc = a.source, ExpandableTVCPreroll(a.data)) :
     "getDataAudien" != a.data || isAudienceCreated || (_AdmAudienData.createTag(a), isAudienceCreated = !0)
 }, !1) : window.attachEvent && window.attachEvent("onmessage", function(a) {
     "addParam" == a.data && a.source.postMessage('addParamTVC("' + admParamTvc() + '")', a.origin);
     "admGetIP" == a.data && a.source.postMessage('admSetIP("' + _AdmGetIP("__IP") + '")', a.origin);
-    if(a.origin.indexOf("vcmedia.vn")!= -1 && a.data.toSring().indexOf("_admTargetTvcPreroll")!= -1)
-    {
-      eval(e.data);
+    try{
+      if(a.origin.indexOf("vcmedia.vn")!= -1 && a.data.indexOf("_admTargetTvcPreroll")!= -1)
+      {
+        eval(e.data);
+      }
+    }catch(e){
+      console.log(e);
     }
+
     "chkPrLink" == a.data && "undefined" != typeof _chkPrLink && (console.log("event.data :" + a.data), a.source.postMessage('addChkPrLink("' + _chkPrLink + '")', a.origin)); - 1 !== a.origin.indexOf("vcmedia.vn") && -1 !== a.data.toString().indexOf(".html") ? (playerIframe = a.origin,
         playerTvc = a.source, ExpandableTVCPreroll(a.data)) : "getDataAudien" != a.data || isAudienceCreated || (_AdmAudienData.createTag(a), isAudienceCreated = !0)
 });
 window.addEventListener("message", function(a) {
     "admCloseExpandVpaidHtml" == a.data && CloseTVCPreroll();
     "admSendClickTracking" == a.data && posMesClickTracking();
-     if (event.data && typeof(event.data) == 'string' &&event.data.indexOf("admOpenLanding") != -1) {eval(event.data)}
+    try{
+      if (event.data && typeof(event.data) == 'string' &&event.data.indexOf("admOpenLanding") != -1) {eval(event.data)}
+    }catch(e){
+      console.log(e);
+    }
 });
 var _AdmPrerollIplay = new function() {
      this.open = function(a){
